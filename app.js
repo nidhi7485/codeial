@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 
+const cookieParser = require('cookie-parser')
 // db
 const connectDB = require('./db/connectDB')
 // rest all packages
@@ -17,7 +18,9 @@ const authRouter = require('./routes/authRoutes')
 const userRouter = require('./routes/usersRoutes')
 app.use(express.json())
 app.use(morgan('tiny'))
+app.use(cookieParser())
 app.get('/', (req, res) => {
+  console.log(req.cookies)
   res.send('zindgi barbaad ho gya!!!')
 })
 app.use('/', authRouter)
