@@ -3,14 +3,17 @@ const express = require('express')
 
 const app = express()
 const fs = require('fs')
+const expressLayouts = require('express-ejs-layouts')
 // const fileUpload = require('express-fileupload')
 const port = process.env.PORT || 5000
 
 // const cookieParser = require('cookie-parser')
+
 // db
 const connectDB = require('./db/connectDB')
 // rest all packages
-
+app.use(express.static('./assets'))
+app.use(expressLayouts)
 // middleware
 const notFound = require('./middleware/notFound')
 const errorHandlerMiddleware = require('./middleware/errorHandler')
