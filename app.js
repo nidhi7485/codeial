@@ -2,32 +2,30 @@ require('dotenv').config()
 const express = require('express')
 
 const app = express()
+const fs = require('fs')
+// const fileUpload = require('express-fileupload')
 const port = process.env.PORT || 5000
 
-const cookieParser = require('cookie-parser')
+// const cookieParser = require('cookie-parser')
 // db
 const connectDB = require('./db/connectDB')
 // rest all packages
-const morgan = require('morgan')
 
 // middleware
 const notFound = require('./middleware/notFound')
 const errorHandlerMiddleware = require('./middleware/errorHandler')
 // routes
-const authRouter = require('./routes/authRoutes')
-const userRouter = require('./routes/usersRoutes')
-app.use(express.json())
-app.use(morgan('tiny'))
-app.use(cookieParser())
-app.get('/', (req, res) => {
-  console.log(req.cookies)
-  res.send('zindgi barbaad ho gya!!!')
-})
-app.use('/', authRouter)
-app.use('/', userRouter)
+app.set('view engine', 'ejs')
+app.set('views', './views')
+const hRouter = require('./routes/index')
 
-app.use(notFound)
-app.use(errorHandlerMiddleware)
+// app.use(express.static('./csvfile'))
+// app.use(express.json())
+
+// app.use(fileUpload())
+app.use('/', hRouter)
+// app.use(notFound)
+
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI)
