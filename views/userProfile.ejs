@@ -1,2 +1,21 @@
 <!-- <link rel="stylesheet" href="/css/userProfile.css" /> -->
-<h1>Codeial users profile</h1>
+
+<h2 style="text-align: center">User Profile</h2>
+
+<div class="card">
+  <img
+    src="/images/user_profile.jpg"
+    alt="<%= user.name%>"
+    style="width: 100%"
+  />
+  <h3><span>Name:</span><%= user.name %></h3>
+  <p><span>Email:</span><%= user.email %></p>
+  <!-- <p>Harvard University</p> -->
+  <div style="margin: 24px 0">
+    <a href="#"><i class="fa fa-dribbble"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-linkedin"></i></a>
+    <a href="#"><i class="fa fa-facebook"></i></a>
+  </div>
+  <!-- <p><button>Contact</button></p> -->
+</div>

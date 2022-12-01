@@ -5,7 +5,10 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const fs = require('fs')
 const expressLayouts = require('express-ejs-layouts')
-// const fileUpload = require('express-fileupload')
+
+const passport = require('passport')
+const LocalStrategy = require('./middleware/passport-local-strategy')
+const session = require('express-session')
 const port = process.env.PORT || 5000
 
 // const cookieParser = require('cookie-parser')
@@ -25,13 +28,23 @@ const errorHandlerMiddleware = require('./middleware/errorHandler')
 // routes
 app.set('view engine', 'ejs')
 app.set('views', './views')
-const hRouter = require('./routes/index')
+
 const { urlencoded } = require('express')
 
-// app.use(express.static('./csvfile'))
-// app.use(express.json())
-
-// app.use(fileUpload())
+app.use(
+  session({
+    name: 'codeial',
+    secret: 'secret',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 1000 * 60 * 100,
+    },
+  })
+)
+app.use(passport.initialize())
+app.use(passport.session())
+const hRouter = require('./routes')
 app.use('/', hRouter)
 // app.use(notFound)
 

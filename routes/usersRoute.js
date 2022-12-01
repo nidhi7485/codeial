@@ -1,7 +1,7 @@
 const express = require('express')
 
 const router = express.Router()
-
+const passport = require('passport')
 const {
   profile,
   signUp,
@@ -13,5 +13,9 @@ router.get('/profile', profile)
 router.get('/signup', signUp)
 router.get('/signin', signIn)
 router.post('/create', create)
-router.post('/create-session', createSession)
+router.post(
+  '/create-session',
+  passport.authenticate('local', { failureRedirect: '/users/signin' }),
+  createSession
+)
 module.exports = router

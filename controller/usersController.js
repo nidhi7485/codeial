@@ -1,8 +1,19 @@
 const User = require('../models/User')
 const profile = (req, res) => {
-  return res.render('userProfile', {
-    title: 'Profile',
-  })
+  if (req.cookies.user_id) {
+    User.findById(req.cookies.user_id, function (err, user) {
+      if (user) {
+        return res.render('userProfile', {
+          title: 'Profile',
+          user: user,
+        })
+      } else {
+        return res.redirect('/users/signin')
+      }
+    })
+  } else {
+    return res.redirect('/users/signin')
+  }
 }
 const signUp = (req, res) => {
   return res.render('signUp', {
@@ -34,19 +45,7 @@ const create = function (req, res) {
   })
 }
 const createSession = function (req, res) {
-  User.findOne({ email: req.body.email }, function (err, user) {
-    if (err) {
-      console.log('err in finding in signing up')
-    }
-    if (user) {
-      if (user.password != req.body.password) {
-        return res.redirect('back')
-      }
-      res.cookie('user_id', user.id)
-      return res.redirect('/users/profile')
-    } else {
-      return res.redirect('back')
-    }
-  })
+  console.log('hello niku')
+  return res.redirect('/')
 }
 module.exports = { profile, signUp, signIn, create, createSession }
