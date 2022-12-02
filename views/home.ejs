@@ -1,1 +1,11 @@
 <h1>Codeial/<%= title %></h1>
+
+<section>
+  <h2>User Post</h2>
+  <% if(locals.user){ %>
+  <form action="/posts/create" id="user-post" method="POST">
+    <textarea name="content" rows="3" cols="30"></textarea>
+    <input type="submit" value="Post" />
+  </form>
+  <% } %>
+</section>
