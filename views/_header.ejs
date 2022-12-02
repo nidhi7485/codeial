@@ -2,5 +2,14 @@
   <head> </head>
   <body>
     <p>header page</p>
+    <ul>
+      <% if (locals.user) {%>
+      <li><%= user.name %></li>
+      <li><a href="/users/signOut">signOut</a></li>
+      <% }else{ %>
+      <li><a href="/users/signin">signIn</a></li>
+      <li><a href="/users/signup">signUp</a></li>
+      <% } %>
+    </ul>
   </body>
 </html>

@@ -1,26 +1,21 @@
 const User = require('../models/User')
 const profile = (req, res) => {
-  if (req.cookies.user_id) {
-    User.findById(req.cookies.user_id, function (err, user) {
-      if (user) {
-        return res.render('userProfile', {
-          title: 'Profile',
-          user: user,
-        })
-      } else {
-        return res.redirect('/users/signin')
-      }
-    })
-  } else {
-    return res.redirect('/users/signin')
-  }
+  return res.render('userProfile', {
+    title: 'Profile',
+  })
 }
 const signUp = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect('/users/profile')
+  }
   return res.render('signUp', {
     title: 'SignUp',
   })
 }
-const signIn = (req, res) => {
+const signIn = function (req, res) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/users/profile')
+  }
   return res.render('signIn', {
     title: 'SignIn',
   })
@@ -45,7 +40,21 @@ const create = function (req, res) {
   })
 }
 const createSession = function (req, res) {
-  console.log('hello niku')
   return res.redirect('/')
 }
-module.exports = { profile, signUp, signIn, create, createSession }
+const destroySession = function (req, res) {
+  req.logout(function (err) {
+    if (err) {
+      console.log(err)
+    }
+    res.redirect('/')
+  })
+}
+module.exports = {
+  profile,
+  signUp,
+  signIn,
+  create,
+  createSession,
+  destroySession,
+}

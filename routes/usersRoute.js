@@ -8,9 +8,11 @@ const {
   signIn,
   create,
   createSession,
+  destroySession,
 } = require('../controller/usersController')
-router.get('/profile', profile)
+router.get('/profile', passport.checkAuthentication, profile)
 router.get('/signup', signUp)
+
 router.get('/signin', signIn)
 router.post('/create', create)
 router.post(
@@ -18,4 +20,5 @@ router.post(
   passport.authenticate('local', { failureRedirect: '/users/signin' }),
   createSession
 )
+router.get('/signOut', destroySession)
 module.exports = router

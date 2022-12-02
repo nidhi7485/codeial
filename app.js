@@ -1,20 +1,17 @@
 require('dotenv').config()
+
 const express = require('express')
-
-const app = express()
 const cookieParser = require('cookie-parser')
-const fs = require('fs')
+const app = express()
 const expressLayouts = require('express-ejs-layouts')
-
 const passport = require('passport')
 const LocalStrategy = require('./middleware/passport-local-strategy')
 const session = require('express-session')
 const port = process.env.PORT || 5000
 
-// const cookieParser = require('cookie-parser')
-
 // db
 const connectDB = require('./db/connectDB')
+const MongoStore = require('connect-mongo')
 // rest all packages
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -29,8 +26,7 @@ const errorHandlerMiddleware = require('./middleware/errorHandler')
 app.set('view engine', 'ejs')
 app.set('views', './views')
 
-const { urlencoded } = require('express')
-
+// mongo store is used to store cookie in db
 app.use(
   session({
     name: 'codeial',
@@ -40,13 +36,25 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 100,
     },
+    store: MongoStore.create(
+      {
+        // mongoUrl: 'mongodb://localhost:27017/codial_devlopment',
+        mongoUrl: process.env.MONGO_URI,
+        autoRemove: 'desabled',
+      },
+      function (err) {
+        console.log(err || 'connect-mongodb setup ok')
+      }
+    ),
   })
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(passport.setAuthenticatedUser)
 const hRouter = require('./routes')
+
 app.use('/', hRouter)
-// app.use(notFound)
+app.use(notFound)
 
 const start = async () => {
   try {
