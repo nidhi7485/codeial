@@ -1,7 +1,10 @@
 const User = require('../models/User')
 const profile = (req, res) => {
-  return res.render('userProfile', {
-    title: 'Profile',
+  User.findById(req.params.id, function (err, user) {
+    return res.render('userProfile', {
+      title: 'Profile',
+      user_profile: user,
+    })
   })
 }
 const signUp = (req, res) => {

@@ -10,7 +10,7 @@ const {
   createSession,
   destroySession,
 } = require('../controller/usersController')
-router.get('/profile', passport.checkAuthentication, profile)
+router.get('/profile/:id', passport.checkAuthentication, profile)
 router.get('/signup', signUp)
 
 router.get('/signin', signIn)
