@@ -8,7 +8,7 @@ const passport = require('passport')
 const LocalStrategy = require('./middleware/passport-local-strategy')
 const session = require('express-session')
 const port = process.env.PORT || 5000
-
+const flash = require('connect-flash')
 // db
 const connectDB = require('./db/connectDB')
 const MongoStore = require('connect-mongo')
@@ -22,6 +22,7 @@ app.set('layout extractScripts', true)
 // middleware
 const notFound = require('./middleware/notFound')
 const errorHandlerMiddleware = require('./middleware/errorHandler')
+const flashMiddleware = require('./middleware/flashMessage')
 // routes
 app.set('view engine', 'ejs')
 app.set('views', './views')
@@ -51,6 +52,8 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(passport.setAuthenticatedUser)
+app.use(flash())
+// app.use()
 const hRouter = require('./routes')
 
 app.use('/', hRouter)
