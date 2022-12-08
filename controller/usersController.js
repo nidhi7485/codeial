@@ -52,9 +52,9 @@ const createSession = function (req, res) {
   return res.redirect('/')
 }
 const destroySession = function (req, res) {
-  req.logout()
-  req.flash('success', 'logged out successfully')
-  res.redirect('/')
+  req.logout((err) => console.log(err))
+  req.flash('success', 'logged out ')
+  return res.redirect('/')
 }
 
 module.exports = {

@@ -5,6 +5,14 @@ const userPost = async function (req, res) {
     content: req.body.content,
     user: req.user._id,
   })
+  if (req.xhr) {
+    return res.status(200).json({
+      data: {
+        post: post,
+      },
+      msg: 'post created',
+    })
+  }
   return res.redirect('back')
 }
 

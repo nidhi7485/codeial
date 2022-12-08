@@ -7,12 +7,12 @@
   referrerpolicy="no-referrer"
 />
 
-<h1>Codeial/<%= title %></h1>
+<h1>Facebook/<%= title %></h1>
 
 <section>
   <h2>User Post</h2>
   <% if(locals.user){ %>
-  <form action="/posts/create" id="user-post" method="POST">
+  <form action="/posts/create" id="new-post-form" method="POST">
     <textarea name="content" rows="3" cols="30"></textarea>
     <input type="submit" value="Post" />
   </form>
@@ -30,3 +30,4 @@
   <p><a href="/users/profile/<%= u.id %>"><%= u.name %></a></p>
   <% } %>
 </section>
+<script src="/js/home_post.js"></script>

@@ -53,7 +53,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(passport.setAuthenticatedUser)
 app.use(flash())
-// app.use()
+app.use(flashMiddleware)
 const hRouter = require('./routes')
 
 app.use('/', hRouter)

@@ -4,6 +4,9 @@
   <body>
     <p>header page</p>
     <ul>
+      <li style="color: #fff">
+        <div class="card"><img src="/images/download.png" /></div>
+      </li>
       <% if (locals.user) {%>
       <li style="color: #fff"><a href="#"><%= user.name %></a></li>
       <li><a href="/users/signOut">Sign Out</a></li>

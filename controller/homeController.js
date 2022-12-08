@@ -20,7 +20,7 @@ const home = async (req, res) => {
 
   const users = await User.find()
   return res.render('home', {
-    title: 'Codeal | Home',
+    title: 'Fb | Home',
     posts: posts,
     all_user: users,
   })
