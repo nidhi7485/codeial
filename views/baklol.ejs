@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../assets/css/homepage_style.css" />
+  </head>
+  <body>
+    <div class="fb-header-base"></div>
+    <div class="fb-header">
+      <div id="form1" class="fb-header">
+        Email or Phone<br />
+        <input placeholder="Email" type="mail" name="name" /><br />
+
+        <div id="form2" class="fb-header">
+          Password<br />
+          <input placeholder="Password" type="password" name="password" /><br />
+        </div>
+      </div>
+    </div>
+    <input type="submit" class="submit1" value="login" />
+    <div class="fb-body">
+      <div id="intro2" class="fb-body">Create an account</div>
+
+      <div id="intro3" class="fb-body">It's free and always will be.</div>
+      <form action="/users/create" class="form" method="POST">
+        <div id="form3" class="fb-body">
+          <input
+            placeholder="First Name"
+            type="text"
+            id="namebox"
+            name="name"
+          />
+
+          <input
+            placeholder="Email"
+            type="text"
+            name="email"
+            id="mailbox"
+          /><br />
+
+          <input
+            placeholder="Password"
+            type="password"
+            name="password"
+            id="mailbox"
+          /><br />
+          <input
+            placeholder="confirm-Password"
+            type="password"
+            name="confirm_password"
+            id="mailbox"
+          /><br />
+          <input type="submit" class="button2" value="Create an account" />
+          <br />
+          <hr />
+        </div>
+      </form>
+    </div>
+    <div class="fb-body-footer">
+      <div id="fb-body-footer-base" class="fb-body-footer">
+        English (UK)<br />
+        <hr />
+        Sign Up Log In &copy; www.coderglass.com &nbsp;&nbsp; Design by Varun
+        Singh
+      </div>
+    </div>
+  </body>
+</html>
