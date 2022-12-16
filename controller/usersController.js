@@ -1,4 +1,5 @@
 const User = require('../models/User')
+
 const profile = async (req, res) => {
   const user = User.findById(req.params.id)
   return res.render('userProfile', {
