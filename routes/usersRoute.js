@@ -21,6 +21,6 @@ router.post(
   passport.authenticate('local', { failureRedirect: '/users/signin' }),
   createSession
 )
-router.post('/update/:id', updateUser)
+router.post('/update/:id', passport.checkAuthentication, updateUser)
 router.get('/signOut', destroySession)
 module.exports = router

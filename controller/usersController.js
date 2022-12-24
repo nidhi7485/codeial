@@ -1,7 +1,10 @@
 const User = require('../models/User')
 
 const profile = async (req, res) => {
-  const user = User.findById(req.params.id)
+  const id = req.params.id
+  const user = await User.findById(id)
+
+  console.log(user)
   return res.render('userProfile', {
     title: 'Profile',
     user_profile: user,
@@ -24,7 +27,7 @@ const signIn = function (req, res) {
   })
 }
 const create = async function (req, res) {
-  console.log(req.body.password)
+  // console.log(req.body.password)
   if (req.body.password != req.body.confirm_password) {
     return res.redirect('back')
   }
@@ -42,10 +45,19 @@ const create = async function (req, res) {
 
 const updateUser = async function (req, res) {
   if (req.user.id == req.params.id) {
-    User.findByIdAndUpdate(req.params.id, req.body)
-    return res.redirect('back')
-  } else {
-    return res.status(401).send('Unauthorized')
+    let user = await User.findById(req.params.id)
+    User.uploadAvatar(req, res, function (err) {
+      if (err) {
+        console.log('err')
+      }
+      user.name = req.body.name
+      user.emailreq.body.email
+      if (req.file) {
+        user.avatar = User.avatarPath + '/' + req.file.filename
+      }
+      user.save()
+      return res.redirect('back')
+    })
   }
 }
 const createSession = function (req, res) {

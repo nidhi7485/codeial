@@ -7,9 +7,12 @@ passport.use(
     {
       usernameField: 'email',
     },
+
     function (email, password, done) {
       // find user and established the identity
       User.findOne({ email: email }, function (err, user) {
+        // console.log('aman', email)
+        // console.log('hello', user)
         if (err) {
           console.log('error in finding in user---> Passport')
           return done(err)
